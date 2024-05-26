@@ -1,0 +1,11 @@
+Construir la imagen de Docker:
+    docker-compose build
+Iniciar el contenedor:
+    docker-compose up -d
+Taguear la imagen para Docker Hub:
+    docker tag mysql_biblioteca tu_usuario/mysql_biblioteca:latest
+Iniciar sesión en Docker Hub:
+    docker login
+Subir la imagen a Docker Hub:
+    docker push tu_usuario/mysql_biblioteca:latest
+
