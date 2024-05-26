@@ -1,0 +1,457 @@
+<ng-template #contentModalAgregarLibro let-modal>
+    <div class="container" *ngIf="carga_correcta == '' && !cargando_item">
+        <div class="modal-header">
+            <div class="row mt-1">
+                <h4 class="modal-title text-center d-flex justify-content-center">
+                    {{'Ingrese datos de libro para agregar'}}
+                </h4>
+            </div>
+            <button type="button" id="cancelar-eliminar-dep" class="btn-close" aria-label="Close"
+                (click)="cancelar()"></button>
+        </div>
+        <div class="row mt-1">
+            <div class="col-5">
+                {{ "Nombre Libro" }}
+            </div>
+            <div class="col-7">
+                <input type="text" class="form-control modal-input" [(ngModel)]="nombre" placeholder="Nombre libro"
+                    (input)="setNombre($event)" />
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-5">
+                {{ "Puntuación (1-10)" }}
+            </div>
+            <div class="col-7">
+                <input type="number" class="form-control modal-input" [(ngModel)]="puntuacion" placeholder="puntuacion"
+                    (input)="setPunt($event)" />
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-5">
+                {{ "Descripcion Libro" }}
+            </div>
+            <div class="col-7">
+                <input type="text" class="form-control modal-input" [(ngModel)]="descripcion"
+                    placeholder="descripcion libro" (input)="setDesc($event)" />
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-5">
+                {{ "Año del Libro (DD-MM-YYYY)" }}
+            </div>
+            <div class="col-7">
+                <input type="text" class="form-control modal-input" [(ngModel)]="year" placeholder="año de publicación"
+                    (input)="setYear($event)" />
+            </div>
+        </div>
+        <div class="row justify-content-center text-center align-items-center mb-2 mt-2">
+            <div class="col-6">
+                <button type="button" id="cancelar-carga" [class]="'btn btn-danger boton-modal '" (click)="cancelar()">
+                    Cancelar
+                </button>
+            </div>
+            <div class="col-6">
+                <button type="button" id="subir" [class]="'btn btn-primary boton-modal '" (click)="subirLibro()">
+                    Subir
+                </button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="carga_correcta == '' && cargando_item">
+        <loader></loader>
+    </div>
+    <div *ngIf="carga_correcta == 'true' && !cargando_item" class="container">
+        <div class="row mt-1">
+            <div class="col-12 text-center mt-1 mb-2">
+                <img class="img-fluid status-icon" src="/assets/img/ticket.svg" alt="Check Icon" />
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-12 text-center mt-1 mb-2">
+                <button type="button" id="salir-asignar-dep" class="btn btn-primary boton-modal" (click)="cerrar()">
+                    Salir
+                </button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="carga_correcta == 'false' && !cargando_item" class="container">
+        <div class="row mt-1">
+            <div class="col-12 text-center mt-1 mb-2">
+                <img class="img-fluid status-icon" src="/assets/img/cancel_document.svg" alt="Check Icon" />
+            </div>
+        </div>
+        <div class="row mt-1 modal-title">
+        </div>
+        <div class="row mt-1">
+            <div class="col-12 text-center mt-1 mb-2">
+                <button type="button" id="salir-dep-user-eliminar" class="btn btn-primary boton-modal"
+                    (click)="cerrar()">
+                    Salir
+                </button>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #contentModalResena let-modal>
+    <div class="container" *ngIf="carga_correcta == '' && !cargando_item">
+        <div class="modal-header">
+            <div class="row mt-1">
+                <h4 class="modal-title text-center d-flex justify-content-center">
+                    {{'Ingrese reseña de libro'}}
+                </h4>
+            </div>
+            <button type="button" id="cancelar-eliminar-dep" class="btn-close" aria-label="Close"
+                (click)="cancelar()"></button>
+        </div>
+        <div class="row mt-1">
+            <div class="col-5">
+                {{ "Reseña del Libro" }}
+            </div>
+            <div class="col-7">
+                <input type="text" class="form-control modal-input" [(ngModel)]="resena" placeholder="Reseña del libro"
+                    (input)="setResena($event)" />
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-5">
+                {{ "Puntuación (1-10)" }}
+            </div>
+            <div class="col-7">
+                <input type="number" class="form-control modal-input" [(ngModel)]="puntuacion" placeholder="puntuacion"
+                    (input)="setPuntRe($event)" />
+            </div>
+        </div>
+        <div class="row justify-content-center text-center align-items-center mb-2 mt-2">
+            <div class="col-6">
+                <button type="button" id="cancelar-carga" [class]="'btn btn-danger boton-modal '" (click)="cancelar()">
+                    Cancelar
+                </button>
+            </div>
+            <div class="col-6">
+                <button type="button" id="subir" [class]="'btn btn-primary boton-modal '" (click)="subirResena()">
+                    Subir
+                </button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="carga_correcta == '' && cargando_item">
+        <loader></loader>
+    </div>
+    <div *ngIf="carga_correcta == 'true' && !cargando_item" class="container">
+        <div class="row mt-1">
+            <div class="col-12 text-center mt-1 mb-2">
+                <img class="img-fluid status-icon" src="/assets/img/ticket.svg" alt="Check Icon" />
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-12 text-center mt-1 mb-2">
+                <button type="button" id="salir-asignar-dep" class="btn btn-primary boton-modal" (click)="cerrar()">
+                    Salir
+                </button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="carga_correcta == 'false' && !cargando_item" class="container">
+        <div class="row mt-1">
+            <div class="col-12 text-center mt-1 mb-2">
+                <img class="img-fluid status-icon" src="/assets/img/cancel_document.svg" alt="Check Icon" />
+            </div>
+        </div>
+        <div class="row mt-1 modal-title">
+        </div>
+        <div class="row mt-1">
+            <div class="col-12 text-center mt-1 mb-2">
+                <button type="button" id="salir-dep-user-eliminar" class="btn btn-primary boton-modal"
+                    (click)="cerrar()">
+                    Salir
+                </button>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #contentModalEdit let-modal>
+    <div class="container" *ngIf="carga_correcta == '' && !cargando_item">
+        <div class="modal-header">
+            <div class="row mt-1">
+                <h4 class="modal-title text-center d-flex justify-content-center">
+                    {{'Ingrese datos de libro para editar'}}
+                </h4>
+            </div>
+            <button type="button"  class="btn-close" aria-label="Close"
+                (click)="cancelar()"></button>
+        </div>
+        <div class="row mt-1">
+            <div class="col-5">
+                {{ "Nombre Libro" }}
+            </div>
+            <div class="col-7">
+                <input type="text" class="form-control modal-input" [(ngModel)]="nombre" placeholder="Nombre libro"
+                    (input)="setNombre($event)" />
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-5">
+                {{ "Puntuación (1-10)" }}
+            </div>
+            <div class="col-7">
+                <input type="number" class="form-control modal-input" [(ngModel)]="puntuacion" placeholder="puntuacion"
+                    (input)="setPunt($event)" />
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-5">
+                {{ "Descripcion Libro" }}
+            </div>
+            <div class="col-7">
+                <input type="text" class="form-control modal-input" [(ngModel)]="descripcion"
+                    placeholder="descripcion libro" (input)="setDesc($event)" />
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-5">
+                {{ "Año del Libro (DD-MM-YYYY)" }}
+            </div>
+            <div class="col-7">
+                <input type="text" class="form-control modal-input" [(ngModel)]="year" placeholder="año de publicación"
+                    (input)="setYear($event)" />
+            </div>
+        </div>
+        <div class="row justify-content-center text-center align-items-center mb-2 mt-2">
+            <div class="col-6">
+                <button type="button" id="cancelar-carga" [class]="'btn btn-danger boton-modal '" (click)="cancelar()">
+                    Cancelar
+                </button>
+            </div>
+            <div class="col-6">
+                <button type="button" id="subir" [class]="'btn btn-primary boton-modal '" (click)="updateLibro()">
+                    Subir
+                </button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="carga_correcta == '' && cargando_item">
+        <loader></loader>
+    </div>
+    <div *ngIf="carga_correcta == 'true' && !cargando_item" class="container">
+        <div class="row mt-1">
+            <div class="col-12 text-center mt-1 mb-2">
+                <img class="img-fluid status-icon" src="/assets/img/ticket.svg" alt="Check Icon" />
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-12 text-center mt-1 mb-2">
+                <button type="button" id="salir-asignar-dep" class="btn btn-primary boton-modal" (click)="cerrar()">
+                    Salir
+                </button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="carga_correcta == 'false' && !cargando_item" class="container">
+        <div class="row mt-1">
+            <div class="col-12 text-center mt-1 mb-2">
+                <img class="img-fluid status-icon" src="/assets/img/cancel_document.svg" alt="Check Icon" />
+            </div>
+        </div>
+        <div class="row mt-1 modal-title">
+        </div>
+        <div class="row mt-1">
+            <div class="col-12 text-center mt-1 mb-2">
+                <button type="button" id="salir-dep-user-eliminar" class="btn btn-primary boton-modal"
+                    (click)="cerrar()">
+                    Salir
+                </button>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #contentModalEliminar let-modal>
+    <div class="container" *ngIf="carga_correcta == '' && !cargando_item">
+        <div class="modal-header">
+            <div class="row mt-1">
+                <h4 class="modal-title text-center d-flex justify-content-center">
+                    {{'Seguro de eliminar el libro: ' + nombre}}
+                </h4>
+            </div>
+            <button type="button"  class="btn-close" aria-label="Close"
+                (click)="cancelar()"></button>
+        </div>
+        <div class="row justify-content-center text-center align-items-center mb-2 mt-2">
+            <div class="col-6">
+                <button type="button" id="cancelar-carga" [class]="'btn btn-danger boton-modal '" (click)="cancelar()">
+                    Cancelar
+                </button>
+            </div>
+            <div class="col-6">
+                <button type="button" id="subir" [class]="'btn btn-primary boton-modal '" (click)="eliminarLibro()">
+                    Eliminar
+                </button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="carga_correcta == '' && cargando_item">
+        <loader></loader>
+    </div>
+    <div *ngIf="carga_correcta == 'true' && !cargando_item" class="container">
+        <div class="row mt-1">
+            <div class="col-12 text-center mt-1 mb-2">
+                <img class="img-fluid status-icon" src="/assets/img/ticket.svg" alt="Check Icon" />
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-12 text-center mt-1 mb-2">
+                <button type="button" id="salir-asignar-dep" class="btn btn-primary boton-modal" (click)="cerrar()">
+                    Salir
+                </button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="carga_correcta == 'false' && !cargando_item" class="container">
+        <div class="row mt-1">
+            <div class="col-12 text-center mt-1 mb-2">
+                <img class="img-fluid status-icon" src="/assets/img/cancel_document.svg" alt="Check Icon" />
+            </div>
+        </div>
+        <div class="row mt-1 modal-title">
+        </div>
+        <div class="row mt-1">
+            <div class="col-12 text-center mt-1 mb-2">
+                <button type="button" id="salir-dep-user-eliminar" class="btn btn-primary boton-modal"
+                    (click)="cerrar()">
+                    Salir
+                </button>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<body>
+    <loader *ngIf="cargando"></loader>
+    <div *ngIf="!cargando" class="container-fluid p-0 m-0 w-100 h-100 contenedor" id="global-container">
+        <div class="box-title">
+            <div class="row title-font aling-item-center justify-content-center text-center  mt-3">
+                Bienvenidos al buscador de reseñas de libros
+            </div>
+            <div class="row subtitle-font aling-item-center justify-content-center text-center  m-0">
+                <div class="col-12">
+                    Aca podra encontrar y dejar reseñas sobre los libros más buscados.
+                    Si no encuentra algun libro siempre puede agregarlo mediante el boton adjunto
+                </div>
+            </div>
+            <div class="row subtitle-font aling-item-center justify-content-center text-center  mt-3">
+                <div class="col-12">
+                    <button type="button" class="btn btn-outline modal-button" id="canelar-formulario">
+                        <div class="text" (click)="agregarLibro()">
+                            Agregar Libro
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="box text-center d-flex flex-column">
+            <div class="container-fluid p-0 flex-grow">
+                <div class="row-custom">
+                  <div
+                    class="col-3 text-start"
+                    style="padding-left: 28px;"
+                  >
+                    Nombre
+                  </div>
+                  <div
+                    class="col-4 text-start"
+                    style="padding-left: 26px;"
+                  >
+                    Descripcion
+                  </div>
+                  <div
+                    class="col-2 text-start"
+                    style="padding-left: 0px;"
+                  >
+                    Fecha
+                  </div>
+                  <div class="col-1 text-start"
+                  style="padding-left: 0px;" >
+                    Puntuación
+                  </div>
+                  <div class="col-2 text-start"
+                  style="padding-left: 28px;" >
+                    Acciones
+                  </div>
+                </div>
+              </div>
+            <div class="table-box flex-grow" *ngIf="!cargando">
+            <ul style="padding: 0; margin: 0 w-100">
+                <div class="container-fluid" style="padding: 0" *ngIf="!cargando">
+                    <div *ngFor="let libro of libros; let i = index" class="row-box" 
+                        [style.background-color]="i % 2 === 0 ? '#F1F5F8' : '#FFFFFF'">
+                        <div class="col-3 text-start col-custom letra-mensaje"
+                            style="padding-left: 28px; padding-right: 12px">
+                            {{ libro.nombre }}
+                        </div>
+                        <div class="col-4 text-start col-custom letra-mensaje"
+                            style="padding-left: 28px; padding-right: 12px" >
+                            {{ libro.descripcion }}
+                        </div>
+                        <div class="col-2 text-start col-custom letra-mensaje"
+                            style="padding-left: 8px; padding-right: 12px">
+                            {{ libro.year }}
+                        </div>
+                        <div  class="col-1 text-center col-custom letra-mensaje"
+                            style="padding-left: 8px; padding-right: 12px">
+                            {{ libro.puntuacion}}
+                        </div>
+                        <div  class="col-2 text-center col-custom letra-mensaje"
+                            style="padding-left: 8px; padding-right: 12px">
+                            <div class="row align-items-center">
+                                <div class="col-1"></div>
+                                <div
+                                  class="col-3"
+                                  (click)="editarLibro(libro)"
+                                >
+                                  <img
+                                    class="img-fluid change-icon"
+                                    src="/assets/img/editing.png"
+                                    alt="Editar Libro"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    title="Editar Libro"
+                                  />
+                                </div>
+                                <div
+                                  class="col-3"
+                                  (click)="agregarResena(libro)"
+                                >
+                                  <img
+                                    class="img-fluid change-icon"
+                                    src="/assets/img/assignment.png"
+                                    alt="Añadir reseña"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    title="Añadir reseña"
+                                  />
+                                </div>
+                                <div
+                                  class="col-3"
+                                  (click)="eliminar(libro)"
+                                >
+                                  <img
+                                    class="img-fluid change-icon"
+                                    src="/assets/img/changes.png"
+                                    alt="Eliminar Libro"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    title="Eliminar Libro"
+                                  />
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </div>
+    </div>
+</body>

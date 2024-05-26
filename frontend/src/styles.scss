@@ -1,0 +1,22 @@
+
+@font-face {
+  font-family: Karla;
+  src: url(assets/fonts/Karla-Regular.ttf);
+}
+@font-face {
+  font-family: Karla-Bold;
+  src: url(assets/fonts/Karla-Bold.ttf);
+}
+
+html,
+body {
+  height: 100%;
+  background-color: #e6e8f0 !important;
+  margin: 0;
+}
+
+@import "bootstrap/scss/bootstrap";
+
+
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';

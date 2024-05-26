@@ -1,0 +1,91 @@
+body{
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.contenedor{
+  width: calc(100%);
+  height: calc(100%);
+}
+
+.title-font{
+  font-size: 1.5rem;
+  white-space: nowrap;
+  color: black;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.subtitle-font{
+  font-size: 1.2rem;
+  color:gray;
+  font-family: Karla-Bold;
+  word-wrap: break-word; /* Para compatibilidad con versiones anteriores de CSS */
+  overflow-wrap: break-word; /* Propiedad moderna para ajustar palabras largas */
+  white-space: normal;
+}
+
+.body-font{
+  font-size: 1rem;
+  color:white;
+  font-family: Karla-Bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.modal-button{
+  color: white;
+  width: 20%;
+  height: 10vh;
+  background-color:  #003965;;
+}
+.box-title{
+  height: 30%;
+  width: 100%;
+}
+.box{
+  background-color: #7c97ab;
+  border-radius: 15px;
+  width: 100%;
+  height: 67.5%;
+  align-items: center;
+}
+
+.table-box {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.row-custom {
+  display: flex;
+  color: white;
+  font-size: 1rem;
+  font-family: Karla;
+  width: 100%;
+  align-items: center;
+  height: 6.8vh;
+  justify-content: center;
+}
+
+.row-box{
+  height: 6vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.letra-mensaje {
+  text-align: left;
+  color: #2f5876;
+  font-size: 1rem;
+  font-family: Karla;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+}
+
