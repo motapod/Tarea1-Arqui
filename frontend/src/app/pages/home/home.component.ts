@@ -86,7 +86,7 @@ export class HomeComponent {
     });
   }
 
-  subirLibro(){
+  async subirLibro(){
     const body = {
       nombre: this.nombre,
       tipo: 'libro',
@@ -96,20 +96,20 @@ export class HomeComponent {
     }
     this.cargando_item = true;
     this.carga_correcta = '';
-    const libro_subido = this.LibrosService.subirLibro(body) 
+    const libro_subido = await this.LibrosService.subirLibro(body) .toPromise()
     this.cargando_item = false;
     this.carga_correcta = 'success';
     this.fetchLibros()
     console.log('aaa ', this.year, this.nombre, this.puntuacion, this.tipo)
   }
-  subirResena(){
+  async subirResena(){
     const body = {
       comentario: this.resena,
       puntuacion: this.punt_resena
     }
     this.cargando_item = true;
     this.carga_correcta = '';
-    const subir_resena = this.LibrosService.subirResena(this.id, body)
+    const subir_resena = await this.LibrosService.subirResena(this.id, body).toPromise()
     this.cargando_item = false;
     this.carga_correcta = 'success';
     this.fetchLibros()
@@ -161,10 +161,10 @@ export class HomeComponent {
     console.log('a ', this.id, this.nombre, this.year, this.tipo)
   }
 
-  eliminarLibro(){
+  async eliminarLibro(){
     this.cargando_item = true;
     this.carga_correcta = '';
-    const eliminar = this.LibrosService.eliminarLibro(this.id) 
+    const eliminar = await this.LibrosService.eliminarLibro(this.id).toPromise() 
     this.cargando_item = false;
     this.carga_correcta = 'success';
     this.fetchLibros()
