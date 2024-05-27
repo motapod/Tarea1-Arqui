@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PagesModule } from './pages/pages.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { PagesModule } from './pages/pages.module';
     BrowserModule,
     PagesModule,
     AppRoutingModule,
+    HttpClientModule,
     NgbModule
   ],
   providers: [],

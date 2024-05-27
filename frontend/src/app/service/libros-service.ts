@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, map } from 'rxjs';
 import { apis } from '../../env/env';
-import { OAuthService } from 'angular-oauth2-oidc';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LibrosService {
-  constructor(private http: HttpClient, private auth: OAuthService) {}
+  constructor(private http: HttpClient) {}
 
   obtenerLibros(): Observable<any> {
     let url = apis.obtener_libros;

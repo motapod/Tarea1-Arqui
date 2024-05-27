@@ -4,6 +4,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { Loader } from './loader/loader.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
   ],
   providers: [
   ],

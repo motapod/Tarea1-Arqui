@@ -30,7 +30,7 @@ export class HomeComponent {
   @ViewChild('contentModalEdit', { static: true })
   contentModalEdit!: TemplateRef<any>;
   constructor(private modalService: NgbModal,
-    private LibrosService: LibrosService
+    private LibrosService: LibrosService 
   ){
   }
 
@@ -82,7 +82,7 @@ export class HomeComponent {
     }
     this.cargando_item = true;
     this.carga_correcta = '';
-    const libro_subido = this.LibrosService.subirLibro(body)
+    const libro_subido = this.LibrosService.subirLibro(body) 
     this.cargando_item = false;
     this.carga_correcta = 'success';
     this.fetchLibros()
@@ -150,7 +150,7 @@ export class HomeComponent {
   eliminarLibro(){
     this.cargando_item = true;
     this.carga_correcta = '';
-    const eliminar = this.LibrosService.eliminarLibro(this.id)
+    const eliminar = this.LibrosService.eliminarLibro(this.id) 
     this.cargando_item = false;
     this.carga_correcta = 'success';
     this.fetchLibros()
