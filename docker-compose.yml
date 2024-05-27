@@ -32,10 +32,10 @@ services:
     build: ./frontend
     container_name: angular_front
     ports:
-      - "4200:80"
+      - "4200:4200"
     depends_on:
       - backend
-
+      
 networks:
   my-network:
 

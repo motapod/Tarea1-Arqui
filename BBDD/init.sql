@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS Libros (
     fecha_emision DATE NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS Reseñas (
+CREATE TABLE IF NOT EXISTS Resenas (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_libro INT NOT NULL,
     comentario TEXT NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS Libros (
     fecha_emision DATE NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS Reseñas (
+CREATE TABLE IF NOT EXISTS Resenas (
     id INT AUTO_INCREMENT PRIMARY KEY,
     id_libro INT NOT NULL,
     comentario TEXT NOT NULL,
@@ -47,7 +47,7 @@ INSERT INTO Libros (nombre, tipo, autor, cantidad_hojas, fecha_emision) VALUES
 ('Cien años de soledad', 'Novela', 'Gabriel García Márquez', 417, '1967-05-30');
 
 -- Insertar reseñas por defecto
-INSERT INTO Reseñas (id_libro, comentario, puntuacion) VALUES
+INSERT INTO Resenas (id_libro, comentario, puntuacion) VALUES
 (1, 'Una obra maestra de la literatura española.', 4.8),
 (1, 'Un libro largo pero fascinante.', 4.5),
 (2, 'Un retrato inquietante de un futuro totalitario.', 4.9),
