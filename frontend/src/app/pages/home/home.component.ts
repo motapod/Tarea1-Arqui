@@ -1,5 +1,6 @@
 import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LibrosService } from '../../service/libros-service';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,8 @@ export class HomeComponent {
   public year: any = '';
   public resena:any = '';
   public punt_resena: number = 0;
+  public hojas: number = 0;
+  public autor: string = '';
   public libros: any = [];
   public id: any = -1;
   public nombre : string = '';
@@ -26,7 +29,9 @@ export class HomeComponent {
   contentModalResena!: TemplateRef<any>;
   @ViewChild('contentModalEdit', { static: true })
   contentModalEdit!: TemplateRef<any>;
-  constructor(private modalService: NgbModal,){
+  constructor(private modalService: NgbModal,
+    private LibrosService: LibrosService
+  ){
   }
 
   async ngOnInit() {
@@ -56,6 +61,8 @@ export class HomeComponent {
     this.id=libro.id;
     this.year= libro.year;
     this.nombre=libro.nombre;
+    this.autor = libro.autor;
+    this.hojas = libro.hojas;
     this.descripcion= libro.descripcion;
     this.puntuacion= libro.puntuacion;
     this.modalService.open(this.contentModalEdit, {
@@ -66,14 +73,45 @@ export class HomeComponent {
   }
 
   subirLibro(){
+    const body = {
+      nombre: this.nombre,
+      tipo: 'libro',
+      autor: this.autor,
+      hojas: this.hojas,
+      fecha_emision: this.year
+    }
+    this.cargando_item = true;
+    this.carga_correcta = '';
+    const libro_subido = this.LibrosService.subirLibro(body)
+    this.cargando_item = false;
+    this.carga_correcta = 'success';
+    this.fetchLibros()
     console.log('aaa ', this.year, this.nombre, this.puntuacion, this.descripcion)
   }
   subirResena(){
+    const body = {
+      comentario: this.resena,
+      puntuacion: this.punt_resena
+    }
+    this.cargando_item = true;
+    this.carga_correcta = '';
+    const subir_resena = this.LibrosService.subirResena(this.id, body)
+    this.cargando_item = false;
+    this.carga_correcta = 'success';
+    this.fetchLibros()
     console.log('aaa ', this.punt_resena, this.nombre, this.resena , this.id)
   }
 
   setNombre(event: any){
     this.nombre = event.target.value;
+  }
+
+  setNombreAutor(event: any){
+    this.autor = event.target.value;
+  }
+
+  setHojas(event: any){
+    this.hojas = event.target.value;
   }
 
   setResena(event: any){
@@ -110,15 +148,22 @@ export class HomeComponent {
   }
 
   eliminarLibro(){
-    console.log('a ', this.id, this.nombre)
-    this.carga_correcta = 'true'
+    this.cargando_item = true;
+    this.carga_correcta = '';
+    const eliminar = this.LibrosService.eliminarLibro(this.id)
+    this.cargando_item = false;
+    this.carga_correcta = 'success';
+    this.fetchLibros()
   }
 
-  fetchLibros(){
-    this.libros = [{nombre: 'Hola mundo', id: 1, puntuacion: 5, descripcion: 'Codeando juntos owo', year: '20-03-1902'},
-    {nombre: 'Hola dios', id: 2, puntuacion: 7, descripcion: 'Codeando juntos dios', year: '09-12-1992'},
-    {nombre: 'Hola henry', id: 3, puntuacion: 9, descripcion: 'Codeando juntos henry ', year: '17-8-1995'}
+  fetchLibros(){ 
+    this.cargando = true;
+    this.libros = [{nombre: 'Hola mundo', id: 1,autor: 'Isaac Riveros',hojas: 10, puntuacion: 5, descripcion: 'Codeando juntos owo', year: '20-03-1902'},
+    {nombre: 'Hola dios', id: 2, puntuacion: 7,autor: 'Isaac Riveros',hojas: 300, descripcion: 'Codeando juntos dios', year: '09-12-1992'},
+    {nombre: 'Hola henry', id: 3, puntuacion: 9,autor: 'Henry del mal',hojas: 30, descripcion: 'Codeando juntos henry ', year: '17-8-1995'}
     ]
+    const libros = this.LibrosService.obtenerLibros();
+    this.cargando =false;
     console.log('hola', this.libros)
   }
 
@@ -131,6 +176,8 @@ export class HomeComponent {
     this.carga_correcta = '';
     this.cargando_item = false;
     this.resena = '';
+    this.hojas = 0;
+    this.autor = '';
     this.id= -1;
     this.year = '';
   }

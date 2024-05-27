@@ -20,6 +20,24 @@
         </div>
         <div class="row mt-1">
             <div class="col-5">
+                {{ "Nombre Autor" }}
+            </div>
+            <div class="col-7">
+                <input type="text" class="form-control modal-input" [(ngModel)]="autor" placeholder="Nombre autor"
+                    (input)="setNombreAutor($event)" />
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-5">
+                {{ "Cant Hojas Libro" }}
+            </div>
+            <div class="col-7">
+                <input type="number" class="form-control modal-input" [(ngModel)]="hojas" placeholder="Nombre libro"
+                    (input)="setHojas($event)" />
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-5">
                 {{ "Puntuación (1-10)" }}
             </div>
             <div class="col-7">
@@ -194,6 +212,24 @@
         </div>
         <div class="row mt-1">
             <div class="col-5">
+                {{ "Nombre Autor" }}
+            </div>
+            <div class="col-7">
+                <input type="text" class="form-control modal-input" [(ngModel)]="autor" placeholder="Nombre autor"
+                    (input)="setNombreAutor($event)" />
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-5">
+                {{ "Cant Hojas Libro" }}
+            </div>
+            <div class="col-7">
+                <input type="number" class="form-control modal-input" [(ngModel)]="hojas" placeholder="Nombre libro"
+                    (input)="setHojas($event)" />
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-5">
                 {{ "Puntuación (1-10)" }}
             </div>
             <div class="col-7">
@@ -355,19 +391,31 @@
             <div class="container-fluid p-0 flex-grow">
                 <div class="row-custom">
                   <div
-                    class="col-3 text-start"
+                    class="col-2 text-start"
                     style="padding-left: 28px;"
                   >
                     Nombre
                   </div>
                   <div
-                    class="col-4 text-start"
+                    class="col-2 text-start"
+                    style="padding-left: 28px;"
+                  >
+                    Autor
+                  </div>
+                  <div
+                    class="col-3 text-start"
                     style="padding-left: 26px;"
                   >
                     Descripcion
                   </div>
                   <div
-                    class="col-2 text-start"
+                    class="col-1 text-start"
+                    style="padding-left: 28px;"
+                  >
+                    Hojas
+                  </div>
+                  <div
+                    class="col-1 text-start"
                     style="padding-left: 0px;"
                   >
                     Fecha
@@ -387,15 +435,23 @@
                 <div class="container-fluid" style="padding: 0" *ngIf="!cargando">
                     <div *ngFor="let libro of libros; let i = index" class="row-box" 
                         [style.background-color]="i % 2 === 0 ? '#F1F5F8' : '#FFFFFF'">
-                        <div class="col-3 text-start col-custom letra-mensaje"
+                        <div class="col-2 text-start col-custom letra-mensaje"
                             style="padding-left: 28px; padding-right: 12px">
                             {{ libro.nombre }}
                         </div>
-                        <div class="col-4 text-start col-custom letra-mensaje"
+                        <div class="col-2 text-start col-custom letra-mensaje"
+                            style="padding-left: 28px; padding-right: 12px">
+                            {{ libro.autor }}
+                        </div>
+                        <div class="col-3 text-start col-custom letra-mensaje"
                             style="padding-left: 28px; padding-right: 12px" >
                             {{ libro.descripcion }}
                         </div>
-                        <div class="col-2 text-start col-custom letra-mensaje"
+                        <div class="col-1 text-start col-custom letra-mensaje"
+                            style="padding-left: 8px; padding-right: 12px">
+                            {{ libro.hojas }}
+                        </div>
+                        <div class="col-1 text-start col-custom letra-mensaje"
                             style="padding-left: 8px; padding-right: 12px">
                             {{ libro.year }}
                         </div>
