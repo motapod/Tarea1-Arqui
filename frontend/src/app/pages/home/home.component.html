@@ -47,11 +47,11 @@
         </div>
         <div class="row mt-1">
             <div class="col-5">
-                {{ "Descripcion Libro" }}
+                {{ "tipo Libro" }}
             </div>
             <div class="col-7">
-                <input type="text" class="form-control modal-input" [(ngModel)]="descripcion"
-                    placeholder="descripcion libro" (input)="setDesc($event)" />
+                <input type="text" class="form-control modal-input" [(ngModel)]="tipo"
+                    placeholder="tipo libro" (input)="setDesc($event)" />
             </div>
         </div>
         <div class="row mt-1">
@@ -239,11 +239,11 @@
         </div>
         <div class="row mt-1">
             <div class="col-5">
-                {{ "Descripcion Libro" }}
+                {{ "tipo Libro" }}
             </div>
             <div class="col-7">
-                <input type="text" class="form-control modal-input" [(ngModel)]="descripcion"
-                    placeholder="descripcion libro" (input)="setDesc($event)" />
+                <input type="text" class="form-control modal-input" [(ngModel)]="tipo"
+                    placeholder="tipo libro" (input)="setDesc($event)" />
             </div>
         </div>
         <div class="row mt-1">
@@ -406,7 +406,7 @@
                     class="col-3 text-start"
                     style="padding-left: 26px;"
                   >
-                    Descripcion
+                    tipo
                   </div>
                   <div
                     class="col-1 text-start"
@@ -445,11 +445,11 @@
                         </div>
                         <div class="col-3 text-start col-custom letra-mensaje"
                             style="padding-left: 28px; padding-right: 12px" >
-                            {{ libro.descripcion }}
+                            {{ libro.tipo }}
                         </div>
                         <div class="col-1 text-start col-custom letra-mensaje"
                             style="padding-left: 8px; padding-right: 12px">
-                            {{ libro.hojas }}
+                            {{ libro.cantidad_hojas }}
                         </div>
                         <div class="col-1 text-start col-custom letra-mensaje"
                             style="padding-left: 8px; padding-right: 12px">
@@ -457,7 +457,7 @@
                         </div>
                         <div  class="col-1 text-center col-custom letra-mensaje"
                             style="padding-left: 8px; padding-right: 12px">
-                            {{ libro.puntuacion}}
+                            {{ getPuntuacion(i).toFixed(2)}}
                         </div>
                         <div  class="col-2 text-center col-custom letra-mensaje"
                             style="padding-left: 8px; padding-right: 12px">

@@ -19,7 +19,7 @@ export class HomeComponent {
   public libros: any = [];
   public id: any = -1;
   public nombre : string = '';
-  public descripcion: string = '';
+  public tipo: string = '';
   public puntuacion: number = 0;
   @ViewChild('contentModalEliminar', { static: true })
   contentModalEliminar!: TemplateRef<any>;
@@ -57,13 +57,27 @@ export class HomeComponent {
     });
   }
 
+  getPuntuacion(index: any) {
+    let libro_res = this.libros[index];
+    
+    if (libro_res.resenas.length === 0) {
+      return 0;
+    } else {
+      let cont: any = 0;
+      for (let resena of libro_res.resenas) {  
+        cont = resena.puntuacion + cont;  
+      }
+      return (cont / libro_res.resenas.length);  
+    }
+  }
+
   editarLibro(libro: any) {
     this.id=libro.id;
     this.year= libro.year;
     this.nombre=libro.nombre;
     this.autor = libro.autor;
     this.hojas = libro.hojas;
-    this.descripcion= libro.descripcion;
+    this.tipo= libro.tipo;
     this.puntuacion= libro.puntuacion;
     this.modalService.open(this.contentModalEdit, {
       size: 'm',
@@ -86,7 +100,7 @@ export class HomeComponent {
     this.cargando_item = false;
     this.carga_correcta = 'success';
     this.fetchLibros()
-    console.log('aaa ', this.year, this.nombre, this.puntuacion, this.descripcion)
+    console.log('aaa ', this.year, this.nombre, this.puntuacion, this.tipo)
   }
   subirResena(){
     const body = {
@@ -130,7 +144,7 @@ export class HomeComponent {
   }
 
   setDesc(event: any){
-    this.descripcion = event.target.value;
+    this.tipo = event.target.value;
   }
 
   eliminar(libro:any) {
@@ -144,7 +158,7 @@ export class HomeComponent {
   }
 
   updateLibro(){
-    console.log('a ', this.id, this.nombre, this.year, this.descripcion)
+    console.log('a ', this.id, this.nombre, this.year, this.tipo)
   }
 
   eliminarLibro(){
@@ -158,9 +172,13 @@ export class HomeComponent {
 
   async fetchLibros(){ 
     this.cargando = true;
-    this.libros = [{nombre: 'Hola mundo', id: 1,autor: 'Isaac Riveros',hojas: 10, puntuacion: 5, descripcion: 'Codeando juntos owo', year: '20-03-1902'},
-    {nombre: 'Hola dios', id: 2, puntuacion: 7,autor: 'Isaac Riveros',hojas: 300, descripcion: 'Codeando juntos dios', year: '09-12-1992'},
-    {nombre: 'Hola henry', id: 3, puntuacion: 9,autor: 'Henry del mal',hojas: 30, descripcion: 'Codeando juntos henry ', year: '17-8-1995'}
+    this.libros = [{nombre: 'Hola mundo', id: 1,autor: 'Isaac Riveros',cantidad_hojas: 10, puntuacion: 5, tipo: 'Codeando juntos owo', year: '20-03-1902',
+      resenas:[{comentario: "bueno", id:1, puntuacion: 4.7}, {comentario: "bueno", id:2, puntuacion: 9.7}, {comentario: "bueno", id:3, puntuacion: 2.7}]
+    },
+    {nombre: 'Hola dios', id: 2, puntuacion: 7,autor: 'Isaac Riveros',cantidad_hojas: 300, tipo: 'Codeando juntos dios', year: '09-12-1992'
+      ,resenas: []
+    },
+    {nombre: 'Hola henry', resenas: [] ,id: 3, puntuacion: 9,autor: 'Henry del mal',cantidad_hojas: 30, tipo: 'Codeando juntos henry ', year: '17-8-1995'}
     ]
     const libros = await this.LibrosService.obtenerLibros().toPromise();
     this.cargando =false;
@@ -171,7 +189,7 @@ export class HomeComponent {
   cancelar() {
     this.modalService.dismissAll();
     this.nombre = '';
-    this.descripcion = '';
+    this.tipo = '';
     this.puntuacion = 0;
     this.punt_resena = 0;
     this.carga_correcta = '';
