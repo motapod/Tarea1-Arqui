@@ -162,8 +162,9 @@ export class HomeComponent {
     {nombre: 'Hola dios', id: 2, puntuacion: 7,autor: 'Isaac Riveros',hojas: 300, descripcion: 'Codeando juntos dios', year: '09-12-1992'},
     {nombre: 'Hola henry', id: 3, puntuacion: 9,autor: 'Henry del mal',hojas: 30, descripcion: 'Codeando juntos henry ', year: '17-8-1995'}
     ]
-    //const libros = await this.LibrosService.obtenerLibros().toPromise();
+    const libros = await this.LibrosService.obtenerLibros().toPromise();
     this.cargando =false;
+    this.libros = libros
     console.log('hola', this.libros)
   }
 
