@@ -5,7 +5,7 @@ services:
     image: mysql:latest
     container_name: mysql_biblioteca
     ports:
-      - "3306:3306"  
+      - "3307:3307"  
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: biblioteca
@@ -13,6 +13,8 @@ services:
       MYSQL_PASSWORD: mypassword
     volumes:
       - mysql_data:/var/lib/mysql
+    networks:
+      - my-network
 
   backend:
     build: ./backend
@@ -20,7 +22,7 @@ services:
     environment:
       FLASK_APP: app.py
       FLASK_ENV: development
-      MYSQL_HOST: mysql_biblioteca
+      MYSQL_HOST: db  
       MYSQL_DATABASE: biblioteca
       MYSQL_USER: myuser
       MYSQL_PASSWORD: mypassword
@@ -28,6 +30,9 @@ services:
       - "5500:5000"
     depends_on:
       - db
+    networks:
+      - my-network
+
   frontend:
     build: ./frontend
     container_name: angular_front
@@ -35,9 +40,12 @@ services:
       - "4200:4200"
     depends_on:
       - backend
+    networks:
+      - my-network
       
 networks:
   my-network:
+    driver: bridge
 
 volumes:
   mysql_data:

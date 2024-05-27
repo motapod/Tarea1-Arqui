@@ -47,13 +47,9 @@ def obtener_libros_con_resenas():
     return jsonify(libros_json), 200
 
 
+# Ruta para obtener un libro específico con sus reseñas
 @app.route('/libros/<int:libro_id>', methods=['GET'])
 def obtener_libro_con_resenas(libro_id):
-    # Validar si el libro existe
-    cursor.execute("SELECT id FROM Libros WHERE id = %s", (libro_id,))
-    if cursor.fetchone() is None:
-        return jsonify({"mensaje": "El libro especificado no existe."}), 404
-
     # Consultar el libro y sus reseñas
     cursor.execute("SELECT id, nombre, tipo, autor, cantidad_hojas, fecha_emision FROM Libros WHERE id = %s", (libro_id,))
     libro = cursor.fetchone()
@@ -88,7 +84,6 @@ def obtener_libro_con_resenas(libro_id):
     return jsonify(libro_json), 200
 
 
-
 # Ruta para agregar un nuevo libro
 @app.route('/libros', methods=['POST'])
 def agregar_libro():
@@ -109,8 +104,7 @@ def agregar_libro():
     db.commit()
 
     # Obtener el ID del libro recién creado
-    cursor.execute("SELECT LAST_INSERT_ID()")
-    libro_id = cursor.fetchone()[0]
+    libro_id = cursor.lastrowid
 
     # Convertir el resultado a formato JSON
     libro_json = {
@@ -154,8 +148,7 @@ def actualizar_libro(libro_id):
     return jsonify({"mensaje": "Libro actualizado exitosamente."}), 200
 
 
-# DELETE para eliminar un libro
-
+# Ruta para eliminar un libro
 @app.route('/libros/<int:libro_id>', methods=['DELETE'])
 def eliminar_libro(libro_id):
     # Validar si el libro existe
@@ -173,7 +166,8 @@ def eliminar_libro(libro_id):
     # Retornar la respuesta JSON con el mensaje de éxito
     return jsonify({"mensaje": "Libro eliminado exitosamente."}), 200
 
-# Ruta para agregar una nueva reseña
+
+# Ruta para agregar una nueva reseña a un libro
 @app.route('/libros/<int:libro_id>/resenas', methods=['POST'])
 def agregar_resena(libro_id):
     # Obtener los datos de la reseña del cuerpo de la solicitud
@@ -195,8 +189,7 @@ def agregar_resena(libro_id):
     db.commit()
 
     # Obtener el ID de la reseña recién creada
-    cursor.execute("SELECT LAST_INSERT_ID()")
-    resena_id = cursor.fetchone()[0]
+    resena_id = cursor.lastrowid
 
     # Convertir el resultado a formato JSON
     resena_json = {
